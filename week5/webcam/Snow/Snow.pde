@@ -19,7 +19,7 @@ PVector[] snowballs = new PVector[NUMS];
 int fall_shift = 2;
 int snowball_size = 10;
 
-int threshold = 30;
+int threshold = 50;
 
 void setup() {
   size(640, 480);
@@ -30,11 +30,8 @@ void setup() {
   for(int i=0; i<NUMS; i++) {
     snowballs[i] = new PVector( int( random(width-10) )  , int( random(height-10) ) );
   }
-  numPixels = video.width * video.height;
-  println(numPixels);
   noStroke();
   fill(255);
-  smooth();
 }
 
 void draw() {
