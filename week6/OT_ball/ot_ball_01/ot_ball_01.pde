@@ -26,19 +26,21 @@ void draw() {
   background(255);
   
   // caclurate the location of the ball
-  x = x + xspeed;
-  y = y + yspeed;
+  if(go_out==true) {
+    x = x + xspeed;
+    y = y + yspeed;
+  }
   
   if(y>height-ball_size/2 || y< ball_size/2) {
     yspeed *= -1; 
   }
   
-  if( x>width ) {
+  if( x>width+ball_size/2 ) {
     // send message to next computer
-    if(go_out == false) {
+    if(go_out == true) {
       sendOSC(1);
       println("go to next computer !!");
-      go_out = true;
+      go_out = false;
     }
   }
   
@@ -53,13 +55,19 @@ void reSetting() {
   y = 200;
   xspeed = random(1,3);
   yspeed = random(1,3); 
-  go_out = false;
+  go_out = true;
 }
 
 void sendOSC(int val) {
   OscMessage myMessage = new OscMessage("/otball");
   myMessage.add(val);
   oscP5.send(myMessage, myRemoteLocation);
+}
+
+void keyPressed() {
+  if(key==' ') {
+    reSetting();
+  } 
 }
 
 
