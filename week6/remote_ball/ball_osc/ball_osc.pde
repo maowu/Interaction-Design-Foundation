@@ -7,9 +7,11 @@ NetAddress myRemoteLocation;
 String HOST = "127.0.0.1";   
 
 float ball_size = 20;
+PVector ball_pos;
 
 void setup() {
   size(400, 400);
+  ball_pos = new PVector(width/2, height/2);
   
   oscP5 = new OscP5(this,54321);
   myRemoteLocation = new NetAddress(HOST,12345);
@@ -25,12 +27,6 @@ void draw() {
   ellipse(ball_pos.x, ball_pos.y, ball_size, ball_size);
 }
 
-
-void sendOSC(int val) {
-  OscMessage myMessage = new OscMessage("/otball");
-  myMessage.add(val);
-  oscP5.send(myMessage, myRemoteLocation);
-}
 
 
 /* incoming osc message are forwarded to the oscEvent method. */
